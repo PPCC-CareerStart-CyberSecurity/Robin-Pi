@@ -12,7 +12,11 @@ Default Hardware:
 
 Enabling SSH over USB
   On Windows: 
-    Mount the micro sd card containing your operating system, using an adapter if necessary.
-    Open the Boot partition.
-    Create a new, empty file named ssh in the top level directory of Boot.
+    * Mount the micro sd card containing your operating system, using an adapter if necessary.
+    * Open the Boot partition.
+    * Create a new, empty file named ssh in the top level directory of Boot.
+Enabling Ethernet Gadget mode
+  On Windows:
+    * Open config.txt, and add the following on a new line:
+      *dtoverlay=dwc2
     
