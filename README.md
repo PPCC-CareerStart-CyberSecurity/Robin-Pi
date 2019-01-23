@@ -60,3 +60,31 @@ To WiFi:
     
   Linux will ping forever, so kill it with ctrl-c
   
+# INSTALLING REQUIRED DEPENDENCIES
+  (Adapted from https://learn.adafruit.com/adafruit-128x64-oled-bonnet-for-raspberry-pi/usage)
+  
+# RPi.GPIO
+
+  sudo apt-get update
+
+  sudo apt-get install build-essential python-dev python-pip
+
+  sudo pip install RPi.GPIO
+
+# Python Imaging Library
+
+  sudo apt-get install python-imaging python-smbus
+
+# Adafruit SSD1306 python library code
+
+  sudo apt-get install git
+  
+  git clone https://github.com/adafruit/Adafruit_Python_SSD1306.git
+  
+  cd Adafruit_Python_SSD1306
+  
+  sudo python setup.py install
+  
+  
+  
+  
