@@ -106,6 +106,8 @@ Reboot with:
  cd to the Adafruit_Python_SSD1306 folder, then run:
   
   sudo python examples/buttons.py
+  
+ Try the other scripts in the examples directory, then read through the code to see how they work
     
 # STARTING SCRIPTS ON BOOT:
 
