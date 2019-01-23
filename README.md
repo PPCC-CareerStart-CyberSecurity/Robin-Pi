@@ -36,3 +36,27 @@ By Micro USB Cable:
   Plug your Micro USB cable into the micro USB port closest to the middle of the board. If you have your USB Stem installed, it'll be at the end of the red arm labelled D+ D-.
 
 # DO NOT USE BOTH CONNECTION METHODS AT THE SAME TIME!
+
+To WiFi:
+
+ Type the following command to open the Raspberry Pi Configuration Utility:
+ 
+    sudo raspi-config
+    
+  Highlight the second line for Network Options, and press enter
+  
+  If prompted for your country, scroll allllllll the way down to United States, then press enter
+  
+  If you're on the PPCC campus, your SSID will be:
+  
+    PPCC GUEST
+    
+  ... and there won't be a password. You'll have to supply the correct SSID/Passkey for other networks you try to connect to, however
+  Back at the raspi-config menu, press right twice, then press enter when FINISH is highlighted
+  
+  Reboot if requested, or test your WiFi connection by typing:
+  
+    ping google.com
+    
+  Linux will ping forever, so kill it with ctrl-c
+  
