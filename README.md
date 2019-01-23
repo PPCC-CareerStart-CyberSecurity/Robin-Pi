@@ -101,6 +101,12 @@ Reboot with:
   
   sudo python setup.py install
   
+# TESTING YOUR SCREEN AND BUTTONS:
+  
+  cd to the Adafruit_Python_SSD1306 folder, then run:
+  
+    sudo python examples/buttons.py
+  
   
   
   
