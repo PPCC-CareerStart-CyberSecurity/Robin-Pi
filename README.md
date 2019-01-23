@@ -103,9 +103,21 @@ Reboot with:
   
 # TESTING YOUR SCREEN AND BUTTONS:
   
-  cd to the Adafruit_Python_SSD1306 folder, then run:
+ cd to the Adafruit_Python_SSD1306 folder, then run:
   
-    sudo python examples/buttons.py
+  sudo python examples/buttons.py
+    
+# STARTING SCRIPTS ON BOOT:
+
+ Add commands on new lines in /etc/rc.local to run those commands when the RPi0W boots, such as the buttons demo above:
+  
+  sudo nano /etc/rc.local
+  
+ Add this line before the line containing "exit 0"
+ 
+  sudo python /home/pi/Adafruit_Python_SSD1306/examples/buttons.py  &
+ 
+ Then ctrl-o enter ctrl-x to save and quit
   
   
   
