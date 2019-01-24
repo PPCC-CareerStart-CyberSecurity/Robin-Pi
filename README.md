@@ -112,13 +112,13 @@ To OLED Bonnet:
     
 # STARTING SCRIPTS ON BOOT:
 
-  Add commands on new lines in /etc/rc.local to run those commands when the RPi0W boots, such as the buttons demo above:
+  Add commands on new lines in /etc/rc.local to run those commands when the RPi0W boots, such as the stats demo:
   
     sudo nano /etc/rc.local
   
   Add this line before the line containing "exit 0"
  
-    sudo python /home/pi/Adafruit_Python_SSD1306/examples/buttons.py  &
+    sudo python /home/pi/Adafruit_Python_SSD1306/examples/stats.py  &
  
   Then ctrl-o enter ctrl-x to save and quit
   
