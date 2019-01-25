@@ -67,7 +67,7 @@ To OLED Bonnet:
   
   Highlight 5 Interfacing Options and press enter
 
-  Highlight A6 I2C and press enter
+  Highlight A5 I2C and press enter
 
   Highlight Yes and press enter
 
