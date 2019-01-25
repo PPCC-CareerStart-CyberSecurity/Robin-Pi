@@ -122,6 +122,17 @@ To OLED Bonnet:
  
   Then ctrl-o enter ctrl-x to save and quit
   
+# TRANSFERING FILES FROM YOUR PI
+
+  Install proftp:
+    
+    sudo apt install proftpd
+    sudo service proftpd reload
+    
+  Connect to proftpd server from host computer (in-browser):
+  
+    ftp://(your USB IP address)
+  
   
   
   
