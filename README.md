@@ -132,7 +132,64 @@ To OLED Bonnet:
   Connect to proftpd server from host computer (in-browser):
   
     ftp://(your USB IP address)
+    
+# SETTING UP A WIFI ACCESS POINT ON YOUR PI
+  (Adapted from: https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md)
+
+  Update apt-get, if you haven't recently:
   
+    sudo apt-get update
+    
+  Install dnsmasq (dhcp service) and hostapd (access point software):
   
+    sudo apt-get install dnsmasq hostapd
+  
+  Shut off dnsmasq and hostapad until after they've been configured:
+  
+    sudo systemctl stop dnsmasq
+    sudo systemctl stop hostapd
+    
+  # Configure dnsmasq
+  Backup the original dnsmasq.conf file, and create a simpler version:
+  
+    sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig  
+    sudo nano /etc/dnsmasq.conf
+    
+  Add the following to your new dnsmasq.conf file:
+  
+    interface=wlan0      # If your wireless interface is something else, use that instead
+    dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h
+
+  # Configure hostapd
+  Create a new /etc/hostapd/hostapd.conf file, and populate it with your network settings.
+  Change the settings below to fit your requirements:
+  
+    interface=wlan0
+    driver=nl80211
+    ssid=HackMyPi
+    hw_mode=g
+    channel=7
+    wmm_enabled=0
+    macaddr_acl=0
+    auth_algs=1
+    ignore_broadcast_ssid=0
+    wpa=2
+    wpa_passphrase=ChangeThisPassword
+    wpa_key_mgmt=WPA-PSK
+    wpa_pairwise=TKIP
+    rsn_pairwise=CCMP
+    
+  Edit /etc/default/hostapd to update the location of hostapd.conf:
+  
+    sudo nano /etc/default/hostapd
+    
+  Uncomment the line that starts with #DAEMON_CONF, and change it to this:
+  
+    DAEMON_CONF="/etc/hostapd/hostapd.conf"
+    
+  Start both services now:
+  
+    sudo systemctl start hostapd
+    sudo systemctl start dnsmasq
   
   
