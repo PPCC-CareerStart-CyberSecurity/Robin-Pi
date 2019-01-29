@@ -191,5 +191,26 @@ To OLED Bonnet:
   
     sudo systemctl start hostapd
     sudo systemctl start dnsmasq
+    
+  You should now be able to connect to your Pi Thing by switching to the Wireless network you specified (HackMyPi in this example), and sshing the usual way. If you still want to connect to the internet with your Pi Thing, you have a few more steps to complete, though.
+  
+  #Setting up IP forwarding
+  
+    sudo nano /etc/sysctl.conf
+    
+  Find #net.ipv4.ip_forward=1 and delete the #, then save and exit.
+  
+  Tell the firewall (iptables) to allow outbound traffic on eth0:
+  
+    sudo iptables -t nat -A  POSTROUTING -o eth0 -j MASQUERADE
+    sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
+    
+  Add this line to /etc/rc.local, just above exit 0, to set the rule on boot:
+  
+    iptables-restore < /etc/iptables.ipv4.nat
+    
+  Reboot:
+  
+    sudo reboot
   
   
