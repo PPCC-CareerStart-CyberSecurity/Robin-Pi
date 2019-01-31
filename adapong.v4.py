@@ -236,6 +236,8 @@ try:
 		else: # button is pressed:
 			if (rp_dv < 3):
 				rp_dv = rp_dv +1
+				
+		time.sleep(.025)
 
 except:
 	print("except")
