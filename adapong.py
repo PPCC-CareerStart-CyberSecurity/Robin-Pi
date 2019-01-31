@@ -39,7 +39,7 @@ SPI_PORT = 0
 SPI_DEVICE = 0
 
 #Initialize Display
-disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
+disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST_PIN)
 disp.begin()
 disp.clear()
 disp.display()
