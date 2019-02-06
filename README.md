@@ -213,7 +213,7 @@ To OLED Bonnet:
   
     sudo reboot
   
-#CLEAR SCREEN ON LOGIN
+# CLEAR SCREEN ON LOGIN
 If you've added a script to /etc/rc.local, and you subsequently start another script that attempts to use the display, both programs will interfere if you don't kill the first script first. If your rc.local script has done its job and you don't need it anymore, just add these two lines to the end of your ~/.profile file:
 
     sudo kill $(ps -ax | grep '[p]ython /home/pi/' | grep -v sudo | awk '{print $1}')
