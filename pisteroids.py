@@ -99,6 +99,7 @@ def rot_point(angle,point,origin):
 ship = (ex,ey)
 ship_velocity = (0,0)
 r = 0
+r_dv = 0
 
 try:
     while 1:
@@ -129,17 +130,25 @@ try:
 	draw.line((stern,port), fill=255)
 	draw.line((port,bow),   fill=255)
 
-	# test rotation
-	r += 15
-
 	# test movement
 	ship_velocity = 2,2
+
 	# Draw the Scores
 	draw.text(((width/2), 10), str(hi_score), font=font, fill=255)
 
-	# Update Paddle Velocities
+	# Update Ship Velocities
 
-	# Left Joystick pressed up
+	# Joystick pressed right (rotate right)
+	if not GPIO.input(R_pin) and r_dv < 30:
+		r_dv += 5
+	# Joystick pressed left (rotate left)
+	if not GPIO.input(L_pin) and r_dv >-30:
+		r_dv -= 5
+
+	# Update Angle
+	r += r_dv	
+
+	# Joystick pressed up
 #       if GPIO.input(U_pin): # button is released
 #		if (lp_dv < 0):
 #			lp_dv = lp_dv +1
@@ -147,11 +156,11 @@ try:
 #		if (lp_dv > -3):
 #			lp_dv = lp_dv -1
 
-	# Left Joystick pressed down
+	# Joystick pressed down
 #        if GPIO.input(D_pin): # button is released
 #		if (lp_dv > 0):
 #			lp_dv = lp_dv -1
- #       else: # button is pressed:
+#        else: # button is pressed:
 #		if (lp_dv < 3):
 #			lp_dv = lp_dv +1
 
