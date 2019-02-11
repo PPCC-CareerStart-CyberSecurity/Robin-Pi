@@ -220,6 +220,7 @@ If you've added a script to /etc/rc.local, and you subsequently start another sc
     sudo python ~/bin/clear.py
     
 # ENABLING GADGET MODE (still testing this!)
+# MAY BORK YOUR INSTALL!
   (adapted from https://randomnerdtutorials.com/raspberry-pi-zero-usb-keyboard-hid/)
   Run these commands:
     
