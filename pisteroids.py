@@ -98,6 +98,8 @@ def rot_point(angle,point,origin):
 
 ship = (ex,ey)
 ship_velocity = (0,0)
+ship_acceleration = (0,0)
+ship_dv = 0
 r = 0
 r_dv = 0
 
@@ -118,7 +120,7 @@ try:
 		ship = ship[0],-nose
 	elif ship[1]<-nose:
 		ship = ship[0],height+nose
-	
+
 	ship = (ship[0]+ship_velocity[0]),(ship[1]+ship_velocity[1])
 
 	bow   = rot_point(r,(ship[0],  ship[1]-nose),ship)
@@ -130,11 +132,8 @@ try:
 	draw.line((stern,port), fill=255)
 	draw.line((port,bow),   fill=255)
 
-	# test movement
-	ship_velocity = 2,2
-
 	# Draw the Scores
-	draw.text(((width/2), 10), str(hi_score), font=font, fill=255)
+#	draw.text(((width/2), 10), str(hi_score), font=font, fill=255)
 
 	# Update Ship Velocities
 
@@ -142,11 +141,27 @@ try:
 	if not GPIO.input(R_pin) and r_dv < 30:
 		r_dv += 5
 	# Joystick pressed left (rotate left)
-	if not GPIO.input(L_pin) and r_dv >-30:
+	elif not GPIO.input(L_pin) and r_dv >-30:
 		r_dv -= 5
+	# Joystick pressed center (kill rotation)
+	elif not GPIO.input(C_pin):
+		r_dv = 0
+	# Joystick pressed up (accelerate forward)
+	# Stop accelerating at 3, but don't lock out acceleration in other directions! FIX THIS
+	if (not GPIO.input(U_pin)) and ship_dv<4:
+		ship_dv += 1
+		ship_acceleration = rot_point(r,(0,ship_dv),(0,0))
+		ship_velocity = (ship_velocity[0]-ship_acceleration[0],ship_velocity[1]-ship_acceleration[1])
+	elif (not GPIO.input(D_pin)) and ship_dv>-4:
+		ship_dv -= 1
+		ship_acceleration = rot_point(r,(0,ship_dv),(0,0))
+		ship_velocity = (ship_velocity[0]-ship_acceleration[0],ship_velocity[1]-ship_acceleration[1])
+	else:
+		ship_dv = 0
+		ship_acceleration = (0,0)
 
 	# Update Angle
-	r += r_dv	
+	r += r_dv
 
 	# Joystick pressed up
 #       if GPIO.input(U_pin): # button is released
@@ -185,4 +200,7 @@ try:
 #        time.sleep(.005)
 
 except KeyboardInterrupt:
-    GPIO.cleanup()
+	draw.rectangle((0,0,width,height), outline=0, fill=0)
+	disp.image(image)
+	disp.display()
+	GPIO.cleanup()
