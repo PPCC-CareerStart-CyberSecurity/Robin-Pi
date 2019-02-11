@@ -223,6 +223,7 @@ If you've added a script to /etc/rc.local, and you subsequently start another sc
   (adapted from https://randomnerdtutorials.com/raspberry-pi-zero-usb-keyboard-hid/)
   Run these commands:
     
+    sudo BRANCH=next rpi-update c053625    
     echo "dtoverlay=dwc2" | sudo tee -a /boot/config.txt
     echo "dwc2" | sudo tee -a /etc/modules
     sudo echo "libcomposite" | sudo tee -a /etc/modules
