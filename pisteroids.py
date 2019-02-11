@@ -137,6 +137,12 @@ try:
 
 	# Update Ship Velocities
 
+	# A and B buttons both pressed (to kill Velocity)
+	# THIS IS A TOTAL HACK -- remove after fixing speed limit
+	if not GPIO.input(A_pin) and not GPIO.input(B_pin):
+		ship_velocity = (0,0)
+		ship_acceleration = (0,0)
+
 	# Joystick pressed right (rotate right)
 	if not GPIO.input(R_pin) and r_dv < 30:
 		r_dv += 5
