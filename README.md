@@ -219,8 +219,22 @@ If you've added a script to /etc/rc.local, and you subsequently start another sc
     sudo kill $(ps -ax | grep '[p]ython /home/pi/' | grep -v sudo | awk '{print $1}') 2> /dev/null
     sudo python ~/bin/clear.py
     
+# BOOST SCREEN REFRESH RATE
+  (courtesy of Nathan Pierce)
+
+    sudo raspi-config 
+   > Interfacing Options > Enable I2C
+   
+    sudo nano /boot/config.txt
+   Find the line containing "dtparam=i2c_arm=on", and add ",i2c_arm_baudrate=400000", or replace the whole line with this:
+   
+     dtparam=i2c_arm=on,i2c_arm_baudrate=400000
+    Ctrl-O, Ctrl-X to save and exit
+    
+      sudo reboot
+    
 # ENABLING GADGET MODE (still testing this!)
-# MAY BORK YOUR INSTALL!
+# THIS *WILL* BORK YOUR INSTALL!
   (adapted from https://randomnerdtutorials.com/raspberry-pi-zero-usb-keyboard-hid/)
   Run these commands:
     
