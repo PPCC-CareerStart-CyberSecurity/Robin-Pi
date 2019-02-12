@@ -1,6 +1,0 @@
-Adafruit 128x64 OLED Bonnet for Raspberry Pi
-
-Instructions for installing the necessary libraries can be find here:
-https://learn.adafruit.com/adafruit-128x64-oled-bonnet-for-raspberry-pi/usage
-
-Keep in mind, you'll have to have SSH and a network connection working on your Pi before you can install this software.
