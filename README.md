@@ -84,17 +84,17 @@ To OLED Bonnet:
 
     sudo apt-get update
 
-    sudo apt-get install build-essential python-dev python-pip
+    sudo apt-get install -y build-essential python-dev python-pip
 
     sudo pip install RPi.GPIO
 
 # Python Imaging Library
 
-    sudo apt-get install python-imaging python-smbus i2c-tools
+    sudo apt-get install -y python-imaging python-smbus i2c-tools
 
 # Adafruit SSD1306 python library code
 
-    sudo apt-get install git
+    sudo apt-get install -y git
   
     git clone https://github.com/adafruit/Adafruit_Python_SSD1306.git
   
@@ -126,7 +126,7 @@ To OLED Bonnet:
 
   Install proftp:
     
-    sudo apt install proftpd
+    sudo apt install -y proftpd
     sudo service proftpd reload
     
   Connect to proftpd server from host computer (in-browser):
