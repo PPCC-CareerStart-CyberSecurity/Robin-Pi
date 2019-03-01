@@ -122,6 +122,10 @@ To OLED Bonnet:
  
   Then ctrl-o enter ctrl-x to save and quit
   
+  # Clone this library to your device:
+  
+     git clone https://github.com/PPCC-CareerStart-CyberSecurity/Robin-Pi
+  
 # TRANSFERING FILES FROM YOUR PI
 
   Install proftp:
