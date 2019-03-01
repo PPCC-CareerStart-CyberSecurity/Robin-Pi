@@ -142,7 +142,7 @@ To OLED Bonnet:
     
   Install dnsmasq (dhcp service) and hostapd (access point software):
   
-    sudo apt-get install dnsmasq hostapd
+    sudo apt-get install -y dnsmasq hostapd
   
   Shut off dnsmasq and hostapad until after they've been configured:
   
