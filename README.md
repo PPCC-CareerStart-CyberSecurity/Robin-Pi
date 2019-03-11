@@ -236,6 +236,10 @@ If you've added a script to /etc/rc.local, and you subsequently start another sc
     Ctrl-O, Ctrl-X to save and exit
     
       sudo reboot
+      
+# Installing pygame
+
+    sudo apt-get install python-pygame
     
 # ENABLING GADGET MODE (still testing this!)
 # THIS *WILL* BORK YOUR INSTALL!
