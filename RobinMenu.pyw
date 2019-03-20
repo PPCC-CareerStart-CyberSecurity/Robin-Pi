@@ -17,8 +17,8 @@ PI = 3.141592653
 
 # Set the height and width of the screen
 # Uncomment multipliers for debugging
-WD = 128 #* 2
-HT = 64  #* 2
+WD = 128 *4#* 2
+HT = 64  *4#* 2
 BOX = (WD , int(HT/4))
 size = (WD, HT)
 screen = pygame.display.set_mode(size)
@@ -43,7 +43,7 @@ clock = pygame.time.Clock()
 #BOX5 = BOX2 * 4
 #BOX6 = BOX2 * 5
 
-MAIN_MENU = ("MAIN MENU", "SUBMENU 1" , "SUBMENU 2" , "SUBMENU 3" , "SUBMENU 4" , "SUBMENU 5", "SUBMENU 6")
+MAIN_MENU = ("MAIN MENU", "GAMES" , "TOOLS" , "PAYLOADS" , "LOOT" , "SETTINGS", "SHUT DOWN")
 
 MMHT = int(HT/4) * (len(MAIN_MENU) -1)
 
@@ -78,7 +78,7 @@ while not done:
     ## then overwrite with MAIN_MENU[0]
 
     for x in MAIN_MENU[1:]:
-        pygame.draw.rect(screen, BLACK, [0, ((BOX[1] * MAIN_MENU.index(x)) + SCRHT) % MMHT, WD -1, HT / 4], 2)
+        #pygame.draw.rect(screen, BLACK, [0, ((BOX[1] * MAIN_MENU.index(x)) + SCRHT) % MMHT, WD -1, HT / 4], 2)
         screen.blit(font.render(x, True, BLACK), [LMARG, ((BOX[1] * MAIN_MENU.index(x)) + SCRHT + VCENT) % MMHT])
         
     #pygame.draw.rect(screen, BLACK, [0, BOX2, WD -1, HT / 4], 2)
@@ -91,10 +91,11 @@ while not done:
     #screen.blit(font.render("SubMenu 3", True, BLACK), [LMARG, BOX4 + VCENT])
     #screen.blit(font.render("SubMenu 4", True, BLACK), [LMARG, BOX5 + VCENT])
 
-    pygame.draw.rect(screen, WHITE, [0, 0, WD   , HT / 4])
+    pygame.draw.rect(screen, BLACK, [0, 0, WD   , HT / 4])
     pygame.draw.rect(screen, BLACK, [0, 0, WD -1, HT / 4], 2)
+    pygame.draw.polygon(screen, BLACK, [(WD/32,5*HT/16),(WD/32,7*HT/16),(WD/16,6*HT/16)])
 
-    header = font.render("MAIN MENU", True, BLACK)
+    header = font.render("MAIN MENU", True, WHITE)
     screen.blit(header, [(WD - font.size("MAIN MENU")[0])/2, 0 + VCENT])
 
     if BUSY == True:
