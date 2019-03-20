@@ -19,6 +19,7 @@ PI = 3.141592653
 # Uncomment multipliers for debugging
 WD = 128 #* 2
 HT = 64  #* 2
+BOX = (WD , int(HT/4))
 size = (WD, HT)
 screen = pygame.display.set_mode(size)
 
@@ -35,14 +36,16 @@ HCENT = 0
 LMARG = int(WD / 10)
 clock = pygame.time.Clock()
 
-BOX1 = 0
-BOX2 = HT / 4
-BOX3 = BOX2 * 2
-BOX4 = BOX2 * 3
-BOX5 = BOX2 * 4
-BOX6 = BOX2 * 5
+#BOX1 = 0
+#BOX2 = HT / 4
+#BOX3 = BOX2 * 2
+#BOX4 = BOX2 * 3
+#BOX5 = BOX2 * 4
+#BOX6 = BOX2 * 5
 
-MAIN_MENU = ["MAIN MENU", "SUBMENU 1" , "SUBMENU 2" , "SUBMENU 3" , "SUBMENU 4" , "SUBMENU 5"]
+MAIN_MENU = ("MAIN MENU", "SUBMENU 1" , "SUBMENU 2" , "SUBMENU 3" , "SUBMENU 4" , "SUBMENU 5", "SUBMENU 6")
+
+MMHT = int(HT/4) * (len(MAIN_MENU) -1)
 
 font = pygame.font.SysFont('Lucida Console', int(HT/5), True, False)
        
@@ -54,7 +57,7 @@ while not done:
             done = True # Flag that we are done so we exit this loop
         elif event.type == pygame.KEYDOWN:
             # Figure out if it was an arrow key. If so
-            # adjust speed.
+            # scroll the menu.
             if BUSY == False:
                 if event.key == pygame.K_UP:
                     BUSY = True
@@ -73,41 +76,48 @@ while not done:
 
     ## for OPTION in MAIN_MENU[1:]:
     ## then overwrite with MAIN_MENU[0]
-    
-    pygame.draw.rect(screen, BLACK, [0, BOX2, WD -1, HT / 4], 2)
-    pygame.draw.rect(screen, BLACK, [0, BOX3, WD -1, HT / 4], 2)
-    pygame.draw.rect(screen, BLACK, [0, BOX4, WD -1, HT / 4], 2)
-    pygame.draw.rect(screen, BLACK, [0, BOX5, WD -1, HT / 4], 2)
 
-    screen.blit(font.render("SubMenu 1", True, BLACK), [LMARG, BOX2 + VCENT])
-    screen.blit(font.render("SubMenu 2", True, BLACK), [LMARG, BOX3 + VCENT])
-    screen.blit(font.render("SubMenu 3", True, BLACK), [LMARG, BOX4 + VCENT])
-    screen.blit(font.render("SubMenu 4", True, BLACK), [LMARG, BOX5 + VCENT])
+    for x in MAIN_MENU[1:]:
+        pygame.draw.rect(screen, BLACK, [0, ((BOX[1] * MAIN_MENU.index(x)) + SCRHT) % MMHT, WD -1, HT / 4], 2)
+        screen.blit(font.render(x, True, BLACK), [LMARG, ((BOX[1] * MAIN_MENU.index(x)) + SCRHT + VCENT) % MMHT])
+        
+    #pygame.draw.rect(screen, BLACK, [0, BOX2, WD -1, HT / 4], 2)
+    #pygame.draw.rect(screen, BLACK, [0, BOX3, WD -1, HT / 4], 2)
+    #pygame.draw.rect(screen, BLACK, [0, BOX4, WD -1, HT / 4], 2)
+    #pygame.draw.rect(screen, BLACK, [0, BOX5, WD -1, HT / 4], 2)
 
-    pygame.draw.rect(screen, WHITE, [0, BOX1, WD   , HT / 4])
-    pygame.draw.rect(screen, BLACK, [0, BOX1, WD -1, HT / 4], 2)
+    #screen.blit(font.render("SubMenu 1", True, BLACK), [LMARG, BOX2 + VCENT])
+    #screen.blit(font.render("SubMenu 2", True, BLACK), [LMARG, BOX3 + VCENT])
+    #screen.blit(font.render("SubMenu 3", True, BLACK), [LMARG, BOX4 + VCENT])
+    #screen.blit(font.render("SubMenu 4", True, BLACK), [LMARG, BOX5 + VCENT])
+
+    pygame.draw.rect(screen, WHITE, [0, 0, WD   , HT / 4])
+    pygame.draw.rect(screen, BLACK, [0, 0, WD -1, HT / 4], 2)
 
     header = font.render("MAIN MENU", True, BLACK)
-    screen.blit(header, [(WD - font.size("MAIN MENU")[0])/2, BOX1 + VCENT])
+    screen.blit(header, [(WD - font.size("MAIN MENU")[0])/2, 0 + VCENT])
 
     if BUSY == True:
-        if SCRHT == (int(HT/4)):
-            BUSY = False
-            SCRUP = False
-            SCROD = False
-            SCRHT = 0
-        elif SCRUP == True:
-            BOX2 = (BOX2 + 1) % HT
-            BOX3 = (BOX3 + 1) % HT
-            BOX4 = (BOX4 + 1) % HT
-            BOX5 = (BOX5 + 1) % HT
-            SCRHT = SCRHT + 1
+        
+        if SCRUP == True:
+            #BOX2 = (BOX2 + 1) % HT
+            #BOX3 = (BOX3 + 1) % HT
+            #BOX4 = (BOX4 + 1) % HT
+            #BOX5 = (BOX5 + 1) % HT
+            SCRHT = (SCRHT + 1) % MMHT
         elif SCROD == True:
-            BOX2 = (BOX2 - 1) % HT
-            BOX3 = (BOX3 - 1) % HT
-            BOX4 = (BOX4 - 1) % HT
-            BOX5 = (BOX5 - 1) % HT
-            SCRHT = SCRHT + 1
+            #BOX2 = (BOX2 - 1) % HT
+            #BOX3 = (BOX3 - 1) % HT
+            #BOX4 = (BOX4 - 1) % HT
+            #BOX5 = (BOX5 - 1) % HT
+            SCRHT = (SCRHT - 1) % MMHT
+
+        if SCRHT % (int(HT/4)) == 0:
+            BUSY = False
+            #SCRHT = 0
+    else:
+        SCRUP = False
+        SCROD = False
             
         # Go ahead and update the screen with what we've drawn.
     # This MUST happen after all the other drawing commands.
