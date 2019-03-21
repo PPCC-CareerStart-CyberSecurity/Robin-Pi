@@ -241,6 +241,12 @@ If you've added a script to /etc/rc.local, and you subsequently start another sc
 
     sudo apt-get install python-pygame
     
+# Converting from pygame to PIL
+
+    strFormat = 'RGBA'
+    raw_str = pygame.image.tostring(surface, strFormat, False)
+    image = Image.frombytes(strFormat, surface.get_size(), raw_str)
+    
 # ENABLING GADGET MODE (still testing this!)
 # THIS *WILL* BORK YOUR INSTALL!
   (adapted from https://randomnerdtutorials.com/raspberry-pi-zero-usb-keyboard-hid/)
