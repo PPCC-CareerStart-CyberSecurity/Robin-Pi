@@ -17,8 +17,8 @@ PI = 3.141592653
 
 # Set the height and width of the screen
 # Uncomment multipliers for debugging
-WD = 128 *4#* 2
-HT = 64  *4#* 2
+WD = 128 *2#* 2
+HT = 64  *2#* 2
 BOX = (WD , int(HT/4))
 size = (WD, HT)
 screen = pygame.display.set_mode(size)
@@ -30,7 +30,10 @@ done  = False
 BUSY  = False
 SCRUP = False
 SCROD = False
+SCRIT = False
+SCREL = False
 SCRHT = 0
+SCRWD = 0
 VCENT = int((HT/4 - int(HT/5))/2)
 HCENT = 0
 LMARG = int(WD / 10)
@@ -43,6 +46,8 @@ clock = pygame.time.Clock()
 #BOX5 = BOX2 * 4
 #BOX6 = BOX2 * 5
 
+
+# Menu adjusts to elements in this list; first element is always the title bar.s
 MAIN_MENU = ("MAIN MENU", "GAMES" , "TOOLS" , "PAYLOADS" , "LOOT" , "SETTINGS", "SHUT DOWN")
 
 MMHT = int(HT/4) * (len(MAIN_MENU) -1)
@@ -62,9 +67,28 @@ while not done:
                 if event.key == pygame.K_UP:
                     BUSY = True
                     SCRUP = True
+                    SCROD = False
+                    SCRIT = False
+                    SCREL = False
                 elif event.key == pygame.K_DOWN:
                     BUSY = True
+                    SCRUP = False
                     SCROD = True
+                    SCRIT = False
+                    SCREL = False
+                elif event.key == pygame.K_RIGHT:
+                    BUSY = True
+                    SCRUP = False
+                    SCROD = False
+                    SCRIT = True
+                    SCREL = False
+                elif event.key == pygame.K_LEFT:
+                    BUSY = True
+                    SCRUP = False
+                    SCROD = False
+                    SCRIT = False
+                    SCREL = True
+                    
                 
     # All drawing code happens after the for loop and but
     # inside the main while not done loop.
@@ -79,7 +103,8 @@ while not done:
 
     for x in MAIN_MENU[1:]:
         #pygame.draw.rect(screen, BLACK, [0, ((BOX[1] * MAIN_MENU.index(x)) + SCRHT) % MMHT, WD -1, HT / 4], 2)
-        screen.blit(font.render(x, True, BLACK), [LMARG, ((BOX[1] * MAIN_MENU.index(x)) + SCRHT + VCENT) % MMHT])
+        screen.blit(font.render(x, True, BLACK), [SCRWD + LMARG, ((BOX[1] * MAIN_MENU.index(x)) + SCRHT + VCENT) % MMHT])
+        # (SCRWD +  
         
     #pygame.draw.rect(screen, BLACK, [0, BOX2, WD -1, HT / 4], 2)
     #pygame.draw.rect(screen, BLACK, [0, BOX3, WD -1, HT / 4], 2)
@@ -99,26 +124,25 @@ while not done:
     screen.blit(header, [(WD - font.size("MAIN MENU")[0])/2, 0 + VCENT])
 
     if BUSY == True:
-        
         if SCRUP == True:
-            #BOX2 = (BOX2 + 1) % HT
-            #BOX3 = (BOX3 + 1) % HT
-            #BOX4 = (BOX4 + 1) % HT
-            #BOX5 = (BOX5 + 1) % HT
             SCRHT = (SCRHT + 1) % MMHT
         elif SCROD == True:
-            #BOX2 = (BOX2 - 1) % HT
-            #BOX3 = (BOX3 - 1) % HT
-            #BOX4 = (BOX4 - 1) % HT
-            #BOX5 = (BOX5 - 1) % HT
             SCRHT = (SCRHT - 1) % MMHT
-
-        if SCRHT % (int(HT/4)) == 0:
+        elif SCRIT == True:
+            SCRWD = SCRWD - 4
+        elif SCREL == True:
+            SCRWD = SCRWD + 4
+            
+        if (SCRHT % (int(HT/4)) == 0) and (SCRWD % WD == 0):
             BUSY = False
-            #SCRHT = 0
+        #elif SCRWD % WD == 0:
+        #    BUSY = False
+        
     else:
         SCRUP = False
         SCROD = False
+        SCRIT = False
+        SCREL = False
             
         # Go ahead and update the screen with what we've drawn.
     # This MUST happen after all the other drawing commands.
