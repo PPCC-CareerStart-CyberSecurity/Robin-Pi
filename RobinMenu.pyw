@@ -17,8 +17,8 @@ PI = 3.141592653
 
 # Set the height and width of the screen
 # Uncomment multipliers for debugging
-WD = 128 *2#* 2
-HT = 64  *2#* 2
+WD = 128 *4#* 2
+HT = 64  *4#* 2
 BOX = (WD , int(HT/4))
 size = (WD, HT)
 screen = pygame.display.set_mode(size)
@@ -37,6 +37,7 @@ SCRWD = 0
 VCENT = int((HT/4 - int(HT/5))/2)
 HCENT = 0
 LMARG = int(WD / 10)
+DEPTH = 0
 clock = pygame.time.Clock()
 
 #BOX1 = 0
@@ -47,8 +48,10 @@ clock = pygame.time.Clock()
 #BOX6 = BOX2 * 5
 
 
-# Menu adjusts to elements in this list; first element is always the title bar.s
-MAIN_MENU = ("MAIN MENU", "GAMES" , "TOOLS" , "PAYLOADS" , "LOOT" , "SETTINGS", "SHUT DOWN")
+# Menu adjusts to elements in this list; first element is always the title bar.
+MAIN_MENU = ("MAIN MENU","GAMES","TOOLS","PAYLOADS","LOOT","SETTINGS","SHUT DOWN",)
+
+#(("MAIN MENU","MAIN MENU"), ("GAMES",("Asteroids","Pong")), ("TOOLS",("Wireshark","Kismet","Bad USB")), ("PAYLOADS",("P1","P2","P3")), ("LOOT",("passwd","shadow","rc.local")), ("SETTINGS",()), ("SHUT DOWN",("YES","No")))
 
 MMHT = int(HT/4) * (len(MAIN_MENU) -1)
 
@@ -82,12 +85,14 @@ while not done:
                     SCROD = False
                     SCRIT = True
                     SCREL = False
-                elif event.key == pygame.K_LEFT:
+                    DEPTH = DEPTH + 1
+                elif (event.key == pygame.K_LEFT) and (DEPTH >= 0):
                     BUSY = True
                     SCRUP = False
                     SCROD = False
                     SCRIT = False
                     SCREL = True
+                    DEPTH = DEPTH - 1
                     
                 
     # All drawing code happens after the for loop and but
@@ -120,8 +125,8 @@ while not done:
     pygame.draw.rect(screen, BLACK, [0, 0, WD -1, HT / 4], 2)
     pygame.draw.polygon(screen, BLACK, [(WD/32,5*HT/16),(WD/32,7*HT/16),(WD/16,6*HT/16)])
 
-    header = font.render("MAIN MENU", True, WHITE)
-    screen.blit(header, [(WD - font.size("MAIN MENU")[0])/2, 0 + VCENT])
+    header = font.render(MAIN_MENU[DEPTH], True, WHITE)
+    screen.blit(header, [(WD - font.size(MAIN_MENU[DEPTH])[0])/2, 0 + VCENT])
 
     if BUSY == True:
         if SCRUP == True:
