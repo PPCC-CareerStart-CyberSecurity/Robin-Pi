@@ -19,7 +19,7 @@ PI = 3.141592653
 # Uncomment multipliers for debugging
 WD = 128 *4#* 2
 HT = 64  *4#* 2
-BOX = (WD , int(HT/4))
+BOX =  (WD, int(HT/4))
 size = (WD, HT)
 screen = pygame.display.set_mode(size)
 
@@ -49,7 +49,13 @@ clock = pygame.time.Clock()
 
 
 # Menu adjusts to elements in this list; first element is always the title bar.
-MAIN_MENU = ("MAIN MENU","GAMES","TOOLS","PAYLOADS","LOOT","SETTINGS","SHUT DOWN",)
+MAIN_MENU   = ("MAIN MENU","GAMES","TOOLS","PAYLOADS","LOOT","SETTINGS","SHUT DOWN",)
+GAMES       = ("Asteroids","Pong")
+TOOLS       = ("Wireshark","Kismet","Bad USB")
+PAYLOADS    = ("One","Two","Three","Four","Five","Six")
+LOOT        = ("passwd","shadow","rc.local")
+SHUT_DOWN   = ("SHUT DOWN","RESTART","CANCEL")
+
 
 #(("MAIN MENU","MAIN MENU"), ("GAMES",("Asteroids","Pong")), ("TOOLS",("Wireshark","Kismet","Bad USB")), ("PAYLOADS",("P1","P2","P3")), ("LOOT",("passwd","shadow","rc.local")), ("SETTINGS",()), ("SHUT DOWN",("YES","No")))
 
@@ -79,14 +85,14 @@ while not done:
                     SCROD = True
                     SCRIT = False
                     SCREL = False
-                elif event.key == pygame.K_RIGHT:
+                elif (event.key == pygame.K_RIGHT) and (DEPTH < 1):
                     BUSY = True
                     SCRUP = False
                     SCROD = False
                     SCRIT = True
                     SCREL = False
                     DEPTH = DEPTH + 1
-                elif (event.key == pygame.K_LEFT) and (DEPTH >= 0):
+                elif (event.key == pygame.K_LEFT) and (DEPTH > 0):
                     BUSY = True
                     SCRUP = False
                     SCROD = False
